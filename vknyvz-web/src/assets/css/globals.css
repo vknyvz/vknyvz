@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+body {
+    background-color: #0a0e17;
+    color: #e0e0e0;
+}
+
+.terminal-green {
+  color: #4AF626;
+}
+
+.terminal-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+.mobile-background {
+  background-color: #0a0e17 !important;
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}

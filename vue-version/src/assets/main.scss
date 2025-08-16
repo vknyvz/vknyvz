@@ -1,0 +1,23 @@
+@use "./base" as *;
+
+body {
+    background-color: $terminal-bg;
+    color: $terminal-text;
+}
+
+.terminal-green {
+  color: $terminal-green;
+}
+
+.terminal-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+.mobile-background {
+  background-color: #0a0e17 !important;
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}

@@ -1,0 +1,32 @@
+name: Deploy vknyvz
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Deploy vknyvz.com
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.LIGHTSAIL_HOST }}
+        username: ${{ secrets.LIGHTSAIL_USER }}
+        key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+        script: |
+          cd /home/ec2-user/vkn-mainframe
+          git pull origin main
+          
+          cd /home/ec2-user/apps/vknyvz
+          git pull origin main
+          
+          cd /home/ec2-user/vkn-mainframe
+          
+          docker-compose -f docker-compose.multi.yml --profile vknyvz down
+          docker container prune -f
+          docker-compose -f docker-compose.multi.yml --profile vknyvz build --no-cache vknyvz-web vknyvz-api
+          docker-compose -f docker-compose.multi.yml --profile vknyvz up -d vknyvz-web vknyvz-api
+          
+          docker system prune -f

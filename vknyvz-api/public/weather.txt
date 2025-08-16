@@ -1,0 +1,27 @@
+27. 2025-08-16T20:18:46.487Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+26. 2025-08-16T20:04:37.193Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+25. 2025-08-16T03:00:35.790Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+24. 2025-08-16T03:00:34.520Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+23. 2025-08-16T03:00:27.367Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+22. 2025-08-16T02:56:12.579Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+21. 2025-08-16T02:56:12.344Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+20. 2025-08-16T02:56:12.117Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+19. 2025-08-16T02:56:10.864Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+18. 2025-08-16T02:56:06.250Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+17. 2025-08-16T02:52:42.301Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+16. 2025-08-16T02:46:56.937Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+15. 2025-08-16T02:36:14.440Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+14. 2025-08-16T02:36:10.657Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+13. 2025-08-16T02:36:06.987Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+12. 2025-08-16T02:36:05.894Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+11. 2025-08-16T02:36:02.484Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+10. 2025-08-16T02:34:38.047Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+9. 2025-08-16T02:33:59.333Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+8. 2025-08-16T02:33:27.639Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+7. 2025-08-16T02:33:26.705Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+6. 2025-08-16T02:31:56.322Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+5. 2025-08-16T02:31:55.432Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+4. 2025-08-16T02:31:53.192Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+3. 2025-08-16T02:30:33.229Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+2. 2025-08-16T02:30:30.543Z -- City: Thousand Oaks || Latitude: 34.23 || Longitude: -118.84
+1. 2025-07-13 17:57:03  --  City: Thousand Oaks  ||  Latitude: 34.238741154824  ||  Longitude: -118.84287037488
