@@ -26,6 +26,7 @@ jobs:
           
           docker-compose -f docker-compose.multi.yml --profile vknyvz down
           docker container prune -f
+          docker builder prune -a -f
           docker-compose -f docker-compose.multi.yml --profile vknyvz build --no-cache vknyvz-web vknyvz-api
           docker-compose -f docker-compose.multi.yml --profile vknyvz up -d vknyvz-web vknyvz-api
           
