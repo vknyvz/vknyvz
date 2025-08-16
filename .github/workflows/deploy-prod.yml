@@ -22,23 +22,12 @@ jobs:
           cd /home/ec2-user/apps/vknyvz
           git pull origin main
           
-          echo "=== Checking if watch-api folder exists on host ==="
-          ls -la vknyvz-web/src/app/
-          ls -la vknyvz-web/src/app/watch-api/ || echo "watch-api folder not found"
-          
           cd /home/ec2-user/vkn-mainframe
           
           docker-compose -f docker-compose.multi.yml --profile vknyvz down
           docker container prune -f
           docker builder prune -a -f
-          
-          echo "=== Removing vknyvz-web image completely ==="
-          docker rmi vkn-mainframe_vknyvz-web || echo "Image not found"
-          
           docker-compose -f docker-compose.multi.yml --profile vknyvz build --no-cache vknyvz-web vknyvz-api
           docker-compose -f docker-compose.multi.yml --profile vknyvz up -d vknyvz-web vknyvz-api
-          
-          echo "=== Checking if watch-api folder exists in container ==="
-          docker exec vknyvz-web ls -la /app/src/app/ || echo "Failed to list container contents"
           
           docker system prune -f

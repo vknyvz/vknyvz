@@ -22,9 +22,9 @@ export async function GET(request: NextRequest) {
     const data = await response.json();
     
     return NextResponse.json(data);
-  } catch (error) {
+  } catch (e) {
     return NextResponse.json(
-      { error: 'Failed to fetch data' }, 
+      { error: e }, 
       { status: 500 }
     );
   }
