@@ -1,38 +1,8 @@
-# 🔧 vknyvz
+# 👋 Hi, I'm Volkan Yavuz (vknyvz)
 
-My personal portfolio website. 
+🚀 **Developer • Engineer • Problem Solver**
 
-Deployed with Docker and managed via CI/CD.
+I build modern web applications with a focus on scalability, performance, and clean architecture.  
+Passionate about software engineering, cloud-native apps, and AI-powered solutions.  
 
----
-
-## 🏗️ Architecture
-
-- **Frontend** → [Next.js](https://nextjs.org)  
-- **Backend API** → [Node.js](https://nodejs.org)  
-- **Deployment** → Docker + GitHub Actions + Nginx (SSL + reverse proxy)
-
----
-
-## 🌐 Live Applications
-
-- **Portfolio Website** → [https://www.vknyvz.com](https://www.vknyvz.com)  
-- **API Endpoint** → [https://api.vknyvz.com](https://api.vknyvz.com)
-
----
-
-## 💻 Local Development
-
-- **Frontend** → [http://localhost:3002](http://localhost:3002)  
-- **API** → [http://localhost:5002](http://localhost:5001)  
-
----
-
-## 🚀 Usage
-
-```bash
-# Build and start services
-docker-compose up --build -d
-
-# Stop all services
-docker-compose down
+👉 Portfolio Site [README](./README_VKNYVZ.md)
