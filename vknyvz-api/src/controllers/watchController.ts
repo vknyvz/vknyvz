@@ -22,29 +22,48 @@ export const watchAPI = async (req: Request, res: Response) => {
     const geoData = geoResp.data;
 
     const city = geoData[0]?.name || "Unknown";
+
     const { sunrise, sunset, temp, feels_like, weather } = weatherData.current;
-    const timezone = weatherData.timezone;
+
+    const tzName: string | undefined = weatherData.timezone;
+    const tzOffsetSec: number = weatherData.timezone_offset ?? 0;
 
     const tempF = Math.ceil((temp - 273.15) * 9 / 5 + 32);
     const feelsF = Math.ceil((feels_like - 273.15) * 9 / 5 + 32);
     const tempC = Math.ceil(temp - 273.15);
     const feelsC = Math.ceil(feels_like - 273.15);
 
-    const sunriseDate = new Date(sunrise * 1000);
-    const sunsetDate = new Date(sunset * 1000);
+    const formatTime = (unixSec: number, mode: "12" | "24") => {
+      const optsBase: Intl.DateTimeFormatOptions = {
+        hour: mode === "12" ? "numeric" : "2-digit",
+        minute: "2-digit",
+        hour12: mode === "12",
+      };
 
-    const format12 = (d: Date) =>
-      d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })
-        .replace("AM", "a")
-        .replace("PM", "p");
+      if (tzName) {
+        try {
+          const s = new Date(unixSec * 1000).toLocaleTimeString("en-US", {
+            ...optsBase,
+            timeZone: tzName,
+          });
+          return mode === "12" ? s.replace("AM", "a").replace("PM", "p") : s;
+        } catch {
+          // fall through to offset path
+        }
+      }
 
-    const format24 = (d: Date) =>
-      d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
+      const shifted = new Date((unixSec + tzOffsetSec) * 1000);
+      const s = shifted.toLocaleTimeString("en-US", {
+        ...optsBase,
+        timeZone: "UTC",
+      });
+      return mode === "12" ? s.replace("AM", "a").replace("PM", "p") : s;
+    };
 
-    const sunrise12 = format12(sunriseDate);
-    const sunset12 = format12(sunsetDate);
-    const sunrise24 = format24(sunriseDate);
-    const sunset24 = format24(sunsetDate);
+    const sunrise12 = formatTime(sunrise, "12");
+    const sunset12  = formatTime(sunset, "12");
+    const sunrise24 = formatTime(sunrise, "24");
+    const sunset24  = formatTime(sunset, "24");
 
     const now = Math.floor(Date.now() / 1000);
     let nextSunEvent = now < sunrise ? "Sunrise" : now < sunset ? "Sunset" : "Sunrise";
@@ -67,7 +86,7 @@ export const watchAPI = async (req: Request, res: Response) => {
 
     return res.json({
       interval: 30,
-      timezone,
+      timezone: tzName ?? `UTC${tzOffsetSec >= 0 ? "+" : ""}${tzOffsetSec / 3600}`,
       location: { city },
       weather: {
         sunrise_12: sunrise12,
