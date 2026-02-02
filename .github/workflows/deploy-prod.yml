@@ -3,6 +3,7 @@ name: Deploy vknyvz
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -16,6 +17,7 @@ jobs:
         username: ${{ secrets.LIGHTSAIL_USER }}
         key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
         script: |
+          set -euo pipefail
           cd /home/ec2-user/vkn-mainframe
           git pull origin main
           
@@ -24,10 +26,10 @@ jobs:
           
           cd /home/ec2-user/vkn-mainframe
           
-          docker-compose -f docker-compose.multi.yml --profile vknyvz down
+          docker compose -f docker-compose.multi.yml --profile vknyvz down
           docker container prune -f
           docker builder prune -a -f
-          docker-compose -f docker-compose.multi.yml --profile vknyvz build --no-cache vknyvz-web vknyvz-api
-          docker-compose -f docker-compose.multi.yml --profile vknyvz up -d vknyvz-web vknyvz-api
+          docker compose -f docker-compose.multi.yml --profile vknyvz build --no-cache vknyvz-web vknyvz-api
+          docker compose -f docker-compose.multi.yml --profile vknyvz up -d vknyvz-web vknyvz-api
           
           docker system prune -f
