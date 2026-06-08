@@ -1,23 +1,27 @@
 @import "tailwindcss";
 
-body {
-    background-color: #0a0e17;
-    color: #e0e0e0;
+@theme {
+  --color-paper: #f6f5ef;
+  --color-ink: #0a3a66;
+  --color-accent: #0066b1;
+  --color-faint: #8d94a3;
+  --color-grid: #d9d5c6;
+  --color-body: #2c3a52;
+
+  --font-sans: var(--font-ibm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-ibm-mono), ui-monospace, monospace;
+  --font-display: var(--font-libre), "Baskerville", Georgia, serif;
 }
 
-.terminal-green {
-  color: #4AF626;
-}
-
-.terminal-cursor {
-  animation: blink 1s step-end infinite;
-}
-
-.mobile-background {
-  background-color: #0a0e17 !important;
-}
-
-@keyframes blink {
-  from, to { opacity: 1; }
-  50% { opacity: 0; }
+/* The few things Tailwind utilities can't express cleanly: the page-wide
+   dot-grid and smooth-scroll offset. Everything else is utilities in the JSX. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+  }
+  body {
+    background-image: radial-gradient(circle, var(--color-grid) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
 }

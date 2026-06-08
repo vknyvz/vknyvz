@@ -1,49 +1,102 @@
 import type { Metadata } from "next";
+import { IBM_Plex_Sans, IBM_Plex_Mono, Libre_Baskerville } from "next/font/google";
 import "@/assets/css/globals.css";
-import Header from "@/components/Header";
+import Nav from "@/components/Nav";
+import { getProfile, getExperience, getSkills } from "@/lib/content";
+
+const sans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm-sans",
+  display: "swap",
+});
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-ibm-mono",
+  display: "swap",
+});
+const display = Libre_Baskerville({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-libre",
+  display: "swap",
+});
+
+const SITE = "https://www.vknyvz.com";
+const title = "Volkan Yavuz · Product-minded Engineering Leader";
+const description =
+  "Volkan Yavuz, product-minded engineering leader (Tech Lead / Engineering Manager) in Los Angeles. " +
+  "Full-stack across PHP/Laravel, Vue and Node, plus AI/LLM systems that move real numbers.";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Volkan Yavuz",
-  applicationName: "vknyvz[dot]com",
+  metadataBase: new URL(SITE),
+  title: { default: title, template: "%s · Volkan Yavuz" },
+  description,
+  keywords: [
+    "Volkan Yavuz", "Tech Lead", "Engineering Manager", "Full-Stack Engineer",
+    "Laravel", "Vue.js", "Node.js", "PHP", "AI", "LLM", "Los Angeles",
+  ],
+  authors: [{ name: "Volkan Yavuz", url: SITE }],
   creator: "Volkan Yavuz",
-  description: "Volkan Yavuz Portfolio Web Site",
-  keywords: "Volkan Yavuz, volkan, yavuz, developer, engineer"
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: SITE,
+    siteName: "Volkan Yavuz",
+    title,
+    description,
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: title }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/og-image.png"],
+  },
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
+    apple: [{ url: "/apple-touch-icon.png" }],
+    shortcut: ["/favicon.ico"],
+  },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const year = new Date().getFullYear()
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const [profile, experience, skills] = await Promise.all([
+    getProfile(),
+    getExperience(),
+    getSkills(),
+  ]);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: profile.name,
+    jobTitle: profile.roles.join(" / "),
+    url: profile.url,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Los Angeles",
+      addressRegion: "CA",
+      addressCountry: "US",
+    },
+    worksFor: { "@type": "Organization", name: experience[0]?.company ?? "EPCVIP" },
+    alumniOf: { "@type": "CollegeOrUniversity", name: "City University of New York, Hunter College" },
+    knowsAbout: skills.flatMap((s) => s.items),
+  };
 
   return (
-    <html lang="en">
-      <body className="antialiased font-mono bg-terminal-background text-terminal-text min-h-screen">
-        <div className="container mx-auto px-4 py-8">
-          
-          <div className="flex items-center mb-2">
-            <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-            <div className="ml-4 text-sm opacity-70">vknyvz-workstation — zsh — 80×22</div>
-          </div>
-
-          <div className="border border-terminal-green p-6">
-            <div className="flex justify-between items-center mb-12">
-              <div className="terminal-green">&lt;/ Volkan Yavuz</div>
-            
-              <Header />
-            </div>
-
-            {children}
-          </div>
-
-          <div className="mt-8 text-[0.65rem] md:text-sm opacity-70 flex justify-between">
-              <div>Built with Next.js & Tailwind CSS</div>
-              <div>&copy; { year } Volkan Yavuz</div>
-          </div>
-        </div>
+    <html lang="en" className={`${sans.variable} ${mono.variable} ${display.variable}`}>
+      <body id="top" className="min-h-screen bg-paper font-sans text-ink antialiased">
+        <Nav />
+        <main>{children}</main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </body>
     </html>
   );

@@ -10,3 +10,14 @@ Thumbs.db
 
 # env files
 .env*
+
+CLAUDE.md
+
+# design scratch / mockups
+design-concepts/
+
+# local dev scripts (migration runner, db + logo helpers)
+vknyvz-web/scripts/
+
+# playwright mcp artifacts (screenshots, snapshots, logs)
+.playwright-mcp/
