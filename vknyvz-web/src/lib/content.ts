@@ -27,6 +27,7 @@ export const getExperience = cache(async (): Promise<Role[]> => {
     location: r.location ?? undefined,
     logo: r.logo ?? undefined,
     highlights: r.highlights ?? [],
+    positions: r.positions ?? undefined,
   }));
 });
 

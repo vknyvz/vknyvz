@@ -16,6 +16,8 @@ export const profile = {
   url: "https://www.vknyvz.com",
 };
 
+export type Position = { title: string; company: string; logo?: string };
+
 export type Role = {
   title: string;
   company: string;
@@ -23,15 +25,20 @@ export type Role = {
   location?: string;
   logo?: string;
   highlights: string[];
+  positions?: Position[];
 };
 
 export const experience: Role[] = [
   {
-    title: "Senior Software Engineer",
-    company: "EPCVIP",
+    title: "Director of Engineering",
+    company: "Fast Loan Advance",
     period: "2025-Present",
     location: "Los Angeles, CA",
     logo: "/logos/epcvip.jpg",
+    positions: [
+      { title: "Director of Engineering", company: "Fast Loan Advance", logo: "/logos/fast-loan-advance.jpg" },
+      { title: "Senior Software Engineer", company: "EPCVIP" },
+    ],
     highlights: [], // current role, details pending
   },
   {

@@ -53,11 +53,30 @@ export default async function Home() {
                   <p className="font-mono text-[11px] tracking-[0.08em] text-accent">
                     {e.period.toUpperCase()}
                   </p>
-                  <div className="mt-[5px] mb-[2px] flex flex-wrap items-baseline gap-[10px]">
-                    <h3 className="text-[19px] font-bold">{e.title}</h3>
-                    <span className="font-mono text-[13px] text-ink before:text-faint before:content-['@_']">
-                      {e.company}
-                    </span>
+                  <div className="mt-[5px] mb-[2px] space-y-[3px]">
+                    {(e.positions ?? [{ title: e.title, company: e.company }]).map((p, k) => (
+                      <div key={k} className="flex flex-wrap items-baseline gap-[10px]">
+                        {k === 0 ? (
+                          <h3 className="text-[19px] font-bold leading-[1.15]">{p.title}</h3>
+                        ) : (
+                          <p className="text-[19px] font-bold leading-[1.15]">{p.title}</p>
+                        )}
+                        <span className="font-mono text-[13px] text-ink">
+                          {p.logo ? (
+                            <Image
+                              src={p.logo}
+                              alt={`${p.company} logo`}
+                              width={16}
+                              height={16}
+                              className="mr-[6px] inline-block h-4 w-4 border border-grid object-cover align-[-4px]"
+                            />
+                          ) : (
+                            <span className="text-faint">@ </span>
+                          )}
+                          {p.company}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                   <p className="mb-[11px] font-mono text-[11px] text-faint">
                     {e.location} · Full-time
