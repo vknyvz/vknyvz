@@ -12,6 +12,7 @@ Thumbs.db
 .env*
 
 CLAUDE.md
+.claude
 
 # design scratch / mockups
 design-concepts/

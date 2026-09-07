@@ -6,6 +6,22 @@ const RULER = Array.from({ length: 16 });
 
 export const revalidate = 60;
 
+function Highlights({ items }: { items: string[] }) {
+  if (items.length === 0) return null;
+  return (
+    <ul>
+      {items.map((h, j) => (
+        <li
+          key={j}
+          className="relative mb-[5px] max-w-[70ch] pl-[19px] text-[15px] leading-[1.58] text-body before:absolute before:top-[3px] before:left-0 before:text-[11px] before:text-accent before:content-['▸']"
+        >
+          {h}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default async function Home() {
   const [profile, experience, skills, education] = await Promise.all([
     getProfile(),
@@ -53,14 +69,12 @@ export default async function Home() {
                   <p className="font-mono text-[11px] tracking-[0.08em] text-accent">
                     {e.period.toUpperCase()}
                   </p>
-                  <div className="mt-[5px] mb-[2px] space-y-[3px]">
-                    {(e.positions ?? [{ title: e.title, company: e.company }]).map((p, k) => (
-                      <div key={k} className="flex flex-wrap items-baseline gap-[10px]">
-                        {k === 0 ? (
-                          <h3 className="text-[19px] font-bold leading-[1.15]">{p.title}</h3>
-                        ) : (
-                          <p className="text-[19px] font-bold leading-[1.15]">{p.title}</p>
-                        )}
+                  {(e.positions ?? [{ title: e.title, company: e.company, highlights: e.highlights }]).map((p, k) => (
+                    <div key={k} className={k > 0 ? "mt-[16px]" : undefined}>
+                      <div
+                        className={`flex flex-wrap items-baseline gap-[10px] ${k === 0 ? "mt-[5px] mb-[2px]" : "mb-[9px]"}`}
+                      >
+                        <h3 className="text-[19px] font-bold leading-[1.15]">{p.title}</h3>
                         <span className="font-mono text-[13px] text-ink">
                           {p.logo ? (
                             <Image
@@ -76,23 +90,15 @@ export default async function Home() {
                           {p.company}
                         </span>
                       </div>
-                    ))}
-                  </div>
-                  <p className="mb-[11px] font-mono text-[11px] text-faint">
-                    {e.location} · Full-time
-                  </p>
-                  {e.highlights.length > 0 && (
-                    <ul>
-                      {e.highlights.map((h, j) => (
-                        <li
-                          key={j}
-                          className="relative mb-[5px] max-w-[70ch] pl-[19px] text-[15px] leading-[1.58] text-body before:absolute before:top-[3px] before:left-0 before:text-[11px] before:text-accent before:content-['▸']"
-                        >
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                      {k === 0 && (
+                        <p className="mb-[11px] font-mono text-[11px] text-faint">
+                          {e.location} · Full-time
+                        </p>
+                      )}
+                      <Highlights items={p.highlights ?? []} />
+                    </div>
+                  ))}
+                  {e.positions && <Highlights items={e.highlights} />}
                 </div>
               </article>
             ))}
