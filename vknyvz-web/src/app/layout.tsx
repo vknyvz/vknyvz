@@ -3,6 +3,7 @@ import { IBM_Plex_Sans, IBM_Plex_Mono, Libre_Baskerville } from "next/font/googl
 import "@/assets/css/globals.css";
 import Nav from "@/components/Nav";
 import { getProfile, getExperience, getSkills } from "@/lib/content";
+import { LINKEDIN_URL } from "@/content/links";
 
 const sans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -77,6 +78,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     name: profile.name,
     jobTitle: profile.roles.join(" / "),
     url: profile.url,
+    sameAs: [LINKEDIN_URL],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Los Angeles",

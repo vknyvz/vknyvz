@@ -119,9 +119,18 @@ export const education: Education[] = [
 
 export const skills: { group: string; items: string[] }[] = [
   { group: "Leadership", items: ["Team Leadership", "Mentorship", "Hiring", "Agile"] },
-  { group: "Backend", items: ["PHP", "Laravel", "Symfony", "Node / Express", "GraphQL", "Python / Flask"] },
-  { group: "Frontend", items: ["React", "Next.js", "Vue.js", "TypeScript", "SASS"] },
-  { group: "AI / ML", items: ["LLM Integration", "RAG", "OpenAI", "Claude", "NLP"] },
-  { group: "Cloud & DevOps", items: ["AWS", "Lambda", "Fargate", "Docker", "Jenkins CI/CD"] },
-  { group: "Data & Performance", items: ["MySQL", "MongoDB", "Pinecone", "Redis", "ElasticSearch"] },
+  { group: "Frontend", items: ["React", "Next.js", "TypeScript", "Vue.js / Nuxt", "Tailwind CSS"] },
+  { group: "Backend", items: ["Node.js / Express", "NestJS", "PHP", "Laravel", "Symfony", "REST API Design"] },
+  {
+    group: "Cloud & DevOps",
+    items: ["AWS", "Lambda", "Fargate", "DynamoDB", "CloudFront", "Amplify", "Docker", "Terraform", "Linux", "CI/CD"],
+  },
+  {
+    group: "AI",
+    items: ["LLM Integration", "Claude", "OpenAI", "RAG", "Vector Search", "Agentic Tool Use", "MCP Servers", "AI-assisted Engineering"],
+  },
+  {
+    group: "Data & Experimentation",
+    items: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Elasticsearch", "A/B Testing", "Feature Flags", "Analytics Instrumentation"],
+  },
 ];
