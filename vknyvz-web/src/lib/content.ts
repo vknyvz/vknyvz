@@ -26,6 +26,7 @@ export const getExperience = cache(async (): Promise<Role[]> => {
     period: r.period,
     location: r.location ?? undefined,
     logo: r.logo ?? undefined,
+    scope: r.scope ?? undefined,
     highlights: r.highlights ?? [],
     positions: r.positions ?? undefined,
   }));
@@ -38,7 +39,7 @@ export const getEducation = cache(async (): Promise<Education[]> => {
   return data.map((r) => ({
     school: r.school,
     degree: r.degree,
-    period: r.period,
+    period: r.period ?? undefined,
     logo: r.logo ?? undefined,
   }));
 });

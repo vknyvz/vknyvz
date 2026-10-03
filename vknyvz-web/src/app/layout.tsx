@@ -25,10 +25,10 @@ const display = Libre_Baskerville({
 });
 
 const SITE = "https://www.vknyvz.com";
-const title = "Volkan Yavuz · Product-minded Engineering Leader";
+const title = "Volkan Yavuz · Lead Software Engineer & Engineering Manager";
 const description =
-  "Volkan Yavuz, product-minded engineering leader (Tech Lead / Engineering Manager) in Los Angeles. " +
-  "Full-stack across PHP/Laravel, Vue and Node, plus AI/LLM systems that move real numbers.";
+  "Volkan Yavuz, lead software engineer and engineering manager in Los Angeles. " +
+  "React, TypeScript, PHP/Symfony, Node.js and AWS, plus LLM apps in production that move real numbers.";
 
 export const revalidate = 60;
 
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   title: { default: title, template: "%s · Volkan Yavuz" },
   description,
   keywords: [
-    "Volkan Yavuz", "Tech Lead", "Engineering Manager", "Full-Stack Engineer",
-    "Laravel", "Vue.js", "Node.js", "PHP", "AI", "LLM", "Los Angeles",
+    "Volkan Yavuz", "Lead Software Engineer", "Engineering Manager", "Director of Engineering", "Software Architect",
+    "React", "TypeScript", "Next.js", "PHP", "Symfony", "Laravel", "Node.js", "AWS", "AI", "LLM", "Los Angeles",
   ],
   authors: [{ name: "Volkan Yavuz", url: SITE }],
   creator: "Volkan Yavuz",

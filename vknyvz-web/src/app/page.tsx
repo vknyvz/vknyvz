@@ -58,13 +58,22 @@ export default async function Home() {
           <div className="space-y-9">
             {experience.map((e, i) => (
               <article key={`${e.company}-${i}`} className="flex gap-4 max-[760px]:gap-3">
-                <Image
-                  src={e.logo ?? "/logos/epcvip.jpg"}
-                  alt={`${e.company} logo`}
-                  width={48}
-                  height={48}
-                  className="h-12 w-12 shrink-0 border border-ink object-cover"
-                />
+                {e.logo ? (
+                  <Image
+                    src={e.logo}
+                    alt={`${e.company} logo`}
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 shrink-0 border border-ink object-cover"
+                  />
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center border border-ink font-display text-[22px] leading-none"
+                  >
+                    {e.company.charAt(0)}
+                  </span>
+                )}
                 <div className="min-w-0 flex-1">
                   <p className="font-mono text-[11px] tracking-[0.08em] text-accent">
                     {e.period.toUpperCase()}
@@ -94,6 +103,9 @@ export default async function Home() {
                         <p className="mb-[11px] font-mono text-[11px] text-faint">
                           {e.location} · Full-time
                         </p>
+                      )}
+                      {k === 0 && e.scope && (
+                        <p className="mb-[11px] max-w-[70ch] text-[15px] leading-[1.58] text-body">{e.scope}</p>
                       )}
                       <Highlights items={p.highlights ?? []} />
                     </div>
@@ -146,7 +158,9 @@ export default async function Home() {
                   />
                 )}
                 <div className="min-w-0 flex-1">
-                  <p className="font-mono text-[11px] tracking-[0.08em] text-accent">{ed.period}</p>
+                  {ed.period && (
+                    <p className="font-mono text-[11px] tracking-[0.08em] text-accent">{ed.period}</p>
+                  )}
                   <h3 className="mt-[5px] text-[19px] font-bold leading-snug">{ed.school}</h3>
                   <p className="mt-[3px] text-[15px] text-body">{ed.degree}</p>
                 </div>

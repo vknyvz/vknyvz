@@ -1,15 +1,19 @@
 // Single source of truth for résumé content, and the fallback seed if Supabase
 // is unavailable. Components read these shapes via src/lib/content.ts.
+// Copy mirrors the resume master (Volkan_Yavuz_v5.docx) as of 2026-10-03; the
+// live values are in Supabase (see supabase/migrations/0006_sync_resume_v5.sql).
 
 export const profile = {
   name: "Volkan Yavuz",
-  roles: ["Tech Lead", "Engineering Manager", "Engineer"],
+  roles: ["Lead Software Engineer", "Director of Engineering"],
   tagline: "Product-minded engineering leader & hands-on builder",
   location: "Los Angeles, CA",
   bio:
     "I lead teams and still write the code. I've architected and scaled high-traffic " +
-    "platforms across fintech, e-commerce, publishing, and legal tech. I care about clean " +
-    "architecture, DevOps automation, and putting AI to work where it moves real numbers.",
+    "platforms across fintech, e-commerce, publishing, and legal tech, with one pattern across " +
+    "roles: prove the idea with a POC, win executive approval on measured revenue lift, then " +
+    "build the team and the platform that make it repeatable. I care about clean architecture, " +
+    "DevOps automation, and putting AI to work where it moves real numbers.",
   email: "vkn@vknyvz.com",
   phone: "(424) 422-0381",
   site: "vknyvz.com",
@@ -24,54 +28,40 @@ export type Role = {
   period: string;
   location?: string;
   logo?: string;
+  scope?: string; // one sentence on what the role owns, rendered under the title line
   highlights: string[];
   positions?: Position[];
 };
 
 export const experience: Role[] = [
   {
-    title: "Director of Engineering",
-    company: "Fast Loan Advance",
+    title: "Lead Software Engineer, EPCVIP Platform · Director of Engineering, Fast Loan Advance",
+    company: "EPCVIP",
     period: "2025-Present",
     location: "Los Angeles, CA",
     logo: "/logos/epcvip.jpg",
-    positions: [
-      {
-        title: "Director of Engineering",
-        company: "Fast Loan Advance",
-        logo: "/logos/fast-loan-advance.jpg",
-        highlights: [
-          "Lead a 7-engineer team that builds and runs EPCVIP's lending funnel platforms, owning architecture, delivery, and the roadmap across Fast Loan Advance and partner brands.",
-          "Pitched and proved replacing the legacy PHP funnels with a React platform: my POC lifted revenue 3-12% per funnel in A/B tests, and the executive board approved the migration.",
-          "Delivered a partner-embeddable funnel product the company had wanted for years: proved it with a POC, then built it with my team, lifting revenue 5-7% and opening a new distribution channel.",
-          "Architecting the next-generation white-label lending platform on that same product, so the company can launch new brands quickly, with regulatory compliance and automated quality gates built in.",
-          "Delivered a company-wide A/B testing and feature-flag platform with my team, so every product can test ideas against revenue and roll out only the winners, without a deploy.",
-        ],
-      },
-      {
-        title: "Lead Software Engineer",
-        company: "EPCVIP",
-        highlights: [
-          "Built the company's funnel engine from the ground up in React and TypeScript; it now runs hundreds of funnel variants across the company's lending brands.",
-          "Architected and prototyped the embeddable funnel runtime, then guided the team that built it out: partners add one script tag and get a branded loan application on their own site.",
-          "Act as lead developer across EPCVIP's other engineering teams: review code, set technical standards, and own release quality so fewer issues reach production.",
-          "Built and own the delivery pipeline end to end: CI builds, QA and production deploys through automated pull requests with release notes, giving every release an audit trail.",
-        ],
-      },
+    scope:
+      "Serve as lead engineer across EPCVIP's platform teams (Symfony backend, React/TypeScript front end) while running the 7-engineer team behind Fast Loan Advance, EPCVIP's consumer lending brand, and its partner funnels, owning architecture, delivery, and the roadmap.",
+    highlights: [
+      "Replaced the legacy PHP funnel front ends with a React/TypeScript funnel platform on the Symfony backend, built for fast A/B experimentation on a modern codebase and delivery pipeline: the POC lifted revenue 3-12% per funnel, the executive board approved the migration, and the platform now runs hundreds of funnel variants across the company's lending brands.",
+      "Delivered the partner-embeddable version of that platform: affiliates add one script tag to any campaign page and get a branded loan application on their own site. Prototyped the runtime, then built it out with the team, opening a new revenue channel (5-7% lift).",
+      "Built the next-generation white-label platform in Next.js on the Symfony backend to SOC 2 requirements, with a full admin dashboard for internal teams and affiliate partners, a vault for applicant PII, and automated quality gates, so the company can launch new brands quickly.",
+      "Built a standalone A/B testing and feature-flag service with my team, since adopted by other platforms across the company, so every product can test ideas against revenue and roll out only the winners, without a deploy.",
+      "Set technical standards and own release quality across EPCVIP's engineering teams, including the Symfony backend; built the delivery pipeline end to end (CI builds, QA and production deploys through automated pull requests with release notes), giving every release an audit trail.",
     ],
-    highlights: [], // per-role bullets live on each position above
   },
   {
-    title: "Tech Lead – Senior Software Engineer (LLM & Full Stack)",
+    title: "Tech Lead, Senior Software Engineer",
     company: "PlanetArt",
     period: "2019-2025",
     location: "Los Angeles, CA",
     logo: "/logos/planetart.jpg",
     highlights: [
-      "Engineered and deployed an LLM-powered chatbot (Vue.js front-end, Node/Express/PHP microservices on Lambda) that cut customer-service load ~50%; guided an 8-person distributed team, including a React/Symfony/Laravel prompt-management and reporting tool on Pinecone.",
-      "Architected a unified Laravel/Symfony REST API powering all 4 company apps (iOS/Android), eliminating redundant code and keeping functionality consistent across stores.",
-      "Drove the launch of 'FreePrints Gifts' (iOS/Android) as Lead Developer, owning API development, deployment, and post-launch optimization on a Laravel backend.",
-      "Built a Vue (Nuxt) + Laravel/GraphQL call-center CMS on AWS Fargate, and kept 50+ regional sites at 99% uptime with Docker and Jenkins CI/CD.",
+      "Led an 8-person distributed team to ship an LLM-powered customer service chatbot (Vue.js front end, Python/LangChain LLM service, Node.js/PHP microservices on Lambda, Pinecone), cutting customer-service load by roughly 50%, along with the internal prompt-management and reporting tool used to tune it.",
+      "Launched FreePrints Gifts, a brand-new iOS and Android app, from concept to production in under six months: worked with the product department, then architected and led the API build with the mobile developers. The app is now a multimillion-dollar product.",
+      "Built and ran the CMS behind PlanetArt's call center operations (Vue/Nuxt, Laravel/GraphQL on AWS Fargate), scaling automatically with call volume.",
+      "Built the single Laravel REST API that four consumer apps (iOS and Android) share, working alongside a remote mobile team, which eliminated duplicated code and inconsistent behavior across app stores.",
+      "Owned AWS infrastructure, Docker, and Jenkins CI/CD for 50+ regional websites and critical systems, keeping them up through proactive monitoring and deployments.",
     ],
   },
   {
@@ -81,10 +71,9 @@ export const experience: Role[] = [
     location: "Los Angeles, CA",
     logo: "/logos/internet-brands.jpg",
     highlights: [
-      "Spearheaded the modernization of lawyers.com (~1M monthly users): migrated legacy Angular to Vue.js for a 40% load-speed gain (Google Lighthouse), lifting UX, SEO rankings, and organic traffic.",
-      "Cut API response times 50%+ by refactoring inefficient code and adding Redis caching, improving scalability.",
-      "Automated CI/CD with Jenkins (deploys from 15 minutes to under 5) and built a Docker-based dev environment that cut onboarding 70% and ended 'works on my machine' issues.",
-      "Mentored developers, ran code reviews, and contributed to hiring, raising team efficiency and code quality.",
+      "Led the modernization of lawyers.com, an SEO-critical property with close to a million monthly users: migrated legacy Angular to Vue.js for 40% faster page loads (Google Lighthouse) and lower bounce rates, and halved API response times with Redis caching.",
+      "Automated Jenkins CI/CD with integrated QA suites, taking deploys from 15 minutes to under 5, and built a Docker dev environment that cut onboarding time 70%.",
+      "Mentored 5+ developers, ran code reviews, contributed to hiring decisions, and authored the team's Confluence documentation.",
     ],
   },
   {
@@ -94,9 +83,20 @@ export const experience: Role[] = [
     location: "Jersey City, NJ",
     logo: "/logos/forbes.jpg",
     highlights: [
-      "Designed, developed, and maintained the mission-critical Editorial Tools platform at 99.999% uptime for hundreds of editors, contributors, and producers publishing thousands of articles monthly (custom Zend/PHP, MongoDB, Java API).",
-      "Licensed the platform to outside publishing companies, validating its scalability and commercial value.",
-      "Led development of Editorial Tools v2 (AngularJS front-end, Zend Framework 2, Mongo, custom Java API) with continuous delivery via Jenkins.",
+      "Designed, built, and ran Forbes' mission-critical Editorial Tools platform with near-zero downtime for hundreds of editors, contributors, and producers publishing thousands of articles a month (PHP/Zend, MongoDB, Java API).",
+      "Took the platform to external publishers as a licensed product, proving it could run as a commercial offering outside Forbes.",
+      "Led the v2 modernization: replaced Zend with Laravel and moved the front end to AngularJS, cutting backend and UI response times.",
+    ],
+  },
+  {
+    title: "Senior Engineer",
+    company: "Globalworks Group",
+    period: "2011-2012",
+    location: "New York, NY",
+    // No logo on file (the agency is defunct); the page renders a monogram tile instead.
+    highlights: [
+      "Embedded engineer for United Rentals (Fortune 500) at a digital agency: sole developer on the client's CMS, extranet, intranet, and public website (Zend Framework), and the first call for post-launch fixes.",
+      "Built the REST integration to the client's data layer with daily transactional syncs, extended Magento Enterprise against their APIs, ran their load-balanced Linux production environment, and wrote the specs used to train front-end developers.",
     ],
   },
 ];
@@ -104,7 +104,7 @@ export const experience: Role[] = [
 export type Education = {
   school: string;
   degree: string;
-  period: string;
+  period?: string; // omitted on purpose (age marker), as on the resume
   logo?: string;
 };
 
@@ -112,7 +112,6 @@ export const education: Education[] = [
   {
     school: "City University of New York, Hunter College",
     degree: "B.S., Computer Science",
-    period: "2006-2011",
     logo: "/logos/hunter.jpg",
   },
 ];
