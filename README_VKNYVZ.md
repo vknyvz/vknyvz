@@ -2,7 +2,7 @@
 
 My personal portfolio website. 
 
-Deployed with Docker and managed via CI/CD.
+Hosted on Vercel. Every push to `main` deploys automatically.
 
 ---
 
@@ -10,7 +10,7 @@ Deployed with Docker and managed via CI/CD.
 
 - **Frontend** → [Next.js](https://nextjs.org)  
 - **Backend API** → [Node.js](https://nodejs.org)  
-- **Deployment** → Docker + GitHub Actions + Nginx (SSL + reverse proxy)
+- **Deployment** → [Vercel](https://vercel.com) (site and API as two projects, automatic SSL)
 
 ---
 
@@ -24,7 +24,7 @@ Deployed with Docker and managed via CI/CD.
 ## 💻 Local Development
 
 - **Frontend** → [http://localhost:3002](http://localhost:3002)  
-- **API** → [http://localhost:5002](http://localhost:5001)  
+- **API** → [http://localhost:5002](http://localhost:5002)  
 
 ---
 
