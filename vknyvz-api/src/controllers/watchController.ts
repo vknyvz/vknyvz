@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import axios from "axios";
-import fs from "fs";
-import path from "path";
 
 export const watchAPI = async (req: Request, res: Response) => {
   try {
@@ -67,22 +65,6 @@ export const watchAPI = async (req: Request, res: Response) => {
 
     const now = Math.floor(Date.now() / 1000);
     let nextSunEvent = now < sunrise ? "Sunrise" : now < sunset ? "Sunset" : "Sunrise";
-
-    const logFilePath = path.join(__dirname, "../../public/weather.txt");
-    let logContents: string[] = [];
-
-    if (fs.existsSync(logFilePath)) {
-      logContents = fs.readFileSync(logFilePath, "utf-8").split("\n").filter(Boolean);
-    }
-
-    if (logContents.length >= 100) {
-      logContents = [];
-    }
-
-    const logEntry = `${logContents.length + 1}. ${new Date().toISOString()} -- City: ${city} || Latitude: ${lat} || Longitude: ${lon}`;
-    logContents.unshift(logEntry);
-
-    fs.writeFileSync(logFilePath, logContents.join("\n"), "utf-8");
 
     return res.json({
       interval: 30,
